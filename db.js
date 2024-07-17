@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
-
-const mongoUrl = 'mongodb://localhost:27017/studentData';
+require("dotenv").config();
+const mongoUrl = process.env.MONGODB_URL_LOCAL;
 
 const connectDB = async () => {
     try {

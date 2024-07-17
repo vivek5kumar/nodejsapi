@@ -1,8 +1,9 @@
 const express = require('express')
 const app = express()
 const db = require("./db");
-const bodyParser = require("body-parser");
 
+
+const bodyParser = require("body-parser");
 
 const MenuItem = require("./models/menu");
 
@@ -21,5 +22,6 @@ app.use("/person", personRouter);
 const menuRoutes = require("./routes/menuRoutes");
 app.use("/menu", menuRoutes);
 
+const PORT = process.env.PORT || 3000;
 
-app.listen(3000, () => console.log("Server started"))
+app.listen(PORT, () => console.log("Server started"))
