@@ -1,3 +1,5 @@
+const { decrypt } = require("dotenv");
+const { type } = require("express/lib/response");
 const mongoose = require("mongoose");
 
 const personSchema = mongoose.Schema({
@@ -24,8 +26,17 @@ const personSchema = mongoose.Schema({
     Address: { type: String },
     salary: {
         type: Number,
+    },
+    username: {
+        require: true,
+        type: String,
+    },
+    password: {
+        require: true,
+        type: String
     }
 });
+
 
 const personModel = mongoose.model('person', personSchema);
 module.exports = personModel
