@@ -3,7 +3,6 @@ const app = express()
 const db = require("./db");
 const bodyParser = require("body-parser");
 const passport = require("./auth");
-
 require("dotenv").config();
 
 
@@ -30,7 +29,7 @@ app.get("/", function (req, resp) {
 // import the router file
 
 const personRouter = require("./routes/personRoutes");
-app.use("/person", localAuthMIddleware, personRouter);
+app.use("/person", personRouter);
 
 
 const menuRoutes = require("./routes/menuRoutes");

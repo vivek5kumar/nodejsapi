@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router();
 const Person = require('./../models/person');
 const res = require("express/lib/response");
+const { jwtMiddleware, generateToken } = require("./../jwt");
 
 
 // POST route add new person
-router.post("/", async (req, resp) => {
+router.post("/signup", async (req, resp) => {
     try {
         const data = req.body;
 
@@ -14,7 +15,14 @@ router.post("/", async (req, resp) => {
         const newPerson = Person(data);
         const response = await newPerson.save();
         console.log("Saved data");
-        resp.status(200).json(response);
+        const payload = {
+            id: response.id,
+            username: response.username
+
+        }
+        const token = generateToken(payload);
+        console.log("Token is :", token);
+        resp.status(200).json({ response: response, token: token });
     } catch (error) {
         console.log(error);
         resp.status(500).json({ error: "Internal server error", error });
